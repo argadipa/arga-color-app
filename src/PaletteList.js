@@ -10,11 +10,7 @@ class PaletteList extends Component {
                 <h1>Arga Color App</h1>
                 <MiniPalette />
                 {palettes.map(palette => (
-                    <p>
-                        <Link to={`palette/${palette.id}`}>
-                            {palette.paletteName}
-                        </Link>
-                    </p>
+                    <MiniPalette {...palette}/>
                 ))}
             </div>
         );
