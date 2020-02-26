@@ -32,13 +32,13 @@ class NavBar extends Component {
     };
 
     render() {
-        const { level, changeLevel, handleChange } = this.props;
+        const { level, changeLevel } = this.props;
         const { format, open } = this.state;
 
         return (
             <header className="Navbar">
                 <div className="logo">
-                    <a href="#">ACP</a>
+                    <a href="/">ACP</a>
                 </div>
                 <div>
                     <span>Level: {level}</span>
