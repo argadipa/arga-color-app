@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DraggableColorBox from "./DraggableColorBox";
+import DraggableColorList from "./DraggableColorList";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
@@ -14,6 +14,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "@material-ui/core/Button";
+import { arrayMove } from "react-sortable-hoc";
 
 const drawerWidth = 400;
 
@@ -101,9 +102,10 @@ class NewPaletteForm extends Component {
         );
 
         ValidatorForm.addValidationRule("isPaletteNameUnique", value =>
-                this.props.palettes.every(
-                    ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
-                )
+            this.props.palettes.every(
+                ({ paletteName }) =>
+                    paletteName.toLowerCase() !== value.toLowerCase()
+            )
         );
     }
 
@@ -135,7 +137,7 @@ class NewPaletteForm extends Component {
     handleChange = e => {
         this.setState({
             [e.target.name]: e.target.value
-         });
+        });
     };
 
     handleSubmit = () => {
@@ -144,20 +146,32 @@ class NewPaletteForm extends Component {
             paletteName: newName,
             id: newName.replace(/ /g, "-"),
             colors: this.state.colors
-        }
+        };
         this.props.savePalette(newPalette);
-        this.props.history.push('/');
-    }
+        this.props.history.push("/");
+    };
 
-    removeColor = (colorName) => {
+    removeColor = colorName => {
         this.setState({
             colors: this.state.colors.filter(color => color.name != colorName)
         });
-    }
+    };
+
+    onSortEnd = ({ oldIndex, newIndex }) => {
+        this.setState(({ colors }) => ({
+            colors: arrayMove(colors, oldIndex, newIndex)
+        }));
+    };
 
     render() {
         const { classes, palettes } = this.props;
-        const { open, currentColor, colors, newColorName, newPaletteName } = this.state;
+        const {
+            open,
+            currentColor,
+            colors,
+            newColorName,
+            newPaletteName
+        } = this.state;
 
         return (
             <div className={classes.root}>
@@ -191,7 +205,10 @@ class NewPaletteForm extends Component {
                                 value={newPaletteName}
                                 onChange={this.handleChange}
                                 validators={["required", "isPaletteNameUnique"]}
-                                errorMessages={["Enter Palette Name", "Palette Name Must be Unique"]}
+                                errorMessages={[
+                                    "Enter Palette Name",
+                                    "Palette Name Must be Unique"
+                                ]}
                             />
                             <Button
                                 variant="contained"
@@ -263,14 +280,12 @@ class NewPaletteForm extends Component {
                     })}
                 >
                     <div className={classes.drawerHeader} />
-                    {colors.map(color => (
-                        <DraggableColorBox
-                            key={color.name}
-                            color={color.color}
-                            name={color.name}
-                            handleClick={() => this.removeColor(color.name)}
-                        />
-                    ))}
+                    <DraggableColorList
+                        colors={colors}
+                        removeColor={this.removeColor}
+                        axis="xy"
+                        onSortEnd={this.onSortEnd}
+                    />
                 </main>
             </div>
         );
