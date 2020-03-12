@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PaletteFormNav from './PaletteFormNav';
+import DraggableColorList from './DraggableColorList';
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
