@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import PaletteList from "./PaletteList";
 import Pallete from "./Pallete";
-import NewPaletteForm from './NewPaletteForm';
+import NewPaletteForm from "./NewPaletteForm";
 import SingleColorPalette from "./SingleColorPalette";
 import seedColors from "./seedColors";
 import { generatePalette } from "./ColorHelpers";
 
 class App extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             palettes: seedColors
@@ -21,11 +21,11 @@ class App extends Component {
         });
     };
 
-    savePalette = (newPalette) => {
+    savePalette = newPalette => {
         this.setState({
             palettes: [...this.state.palettes, newPalette]
-        })
-    }
+        });
+    };
 
     render() {
         const { palettes } = this.state;
@@ -50,7 +50,7 @@ class App extends Component {
                     )}
                 />
                 <Route
-                    exact
+                		exact
                     path="/palette/:id"
                     render={routeProps => (
                         <Pallete
@@ -75,9 +75,6 @@ class App extends Component {
                     )}
                 />
             </Switch>
-            // <div>
-            //     <Pallete palette={generatePalette(seedColors[4])} />
-            // </div>
         );
     }
 }
