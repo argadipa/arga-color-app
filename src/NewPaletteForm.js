@@ -154,7 +154,8 @@ class NewPaletteForm extends Component {
                         colors={colors}
                         removeColor={this.removeColor}
                         axis="xy"
-                        onSortEnd={this.onSortEnd}
+						onSortEnd={this.onSortEnd}
+						distance={20}
                     />
                 </main>
             </div>
