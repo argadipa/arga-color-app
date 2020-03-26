@@ -8,8 +8,8 @@ class MiniPalette extends Component {
 
 	deletePalette = (e) => {
 		e.stopPropagation();
-		const {deletePalette, id} = this.props;
-		deletePalette(id);
+		const {openDialog, id} = this.props;
+		openDialog(id);
 	}
 
     miniColorBoxes = () => {
