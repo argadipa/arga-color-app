@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+
 import PaletteList from "./PaletteList";
 import Pallete from "./Pallete";
 import NewPaletteForm from "./NewPaletteForm";
 import SingleColorPalette from "./SingleColorPalette";
+
 import seedColors from "./seedColors";
 import { generatePalette } from "./ColorHelpers";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+
 import Page from './Page';
 import './styles/Page.css';
 
@@ -29,7 +32,7 @@ class App extends Component {
 
     deletePalette = id => {
         this.setState(st => ({
-            palettes: st.palettes.filter(palette => palette.id != id)
+            palettes: st.palettes.filter(palette => palette.id !== id)
         }));
         this.syncLocalStorage();
     };

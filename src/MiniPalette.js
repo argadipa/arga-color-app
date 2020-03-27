@@ -18,7 +18,7 @@ class MiniPalette extends PureComponent {
                 <div
                     className={classes.miniColor}
                     style={{ backgroundColor: color.color }}
-                    key={color.paletteName}
+                    key={color.name}
                 />
             );
         });
@@ -29,7 +29,7 @@ class MiniPalette extends PureComponent {
 	}
 
     render() {
-        const { classes, paletteName, emoji, handleClick, id } = this.props;
+        const { classes, paletteName, emoji } = this.props;
         return (
             <div className={classes.root} onClick={this.handleClick}>
                 <DeleteIcon

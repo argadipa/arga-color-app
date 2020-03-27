@@ -74,7 +74,7 @@ class NewPaletteForm extends Component {
 
     removeColor = colorName => {
         this.setState({
-            colors: this.state.colors.filter(color => color.name != colorName)
+            colors: this.state.colors.filter(color => color.name !== colorName)
         });
     };
 

@@ -14,7 +14,6 @@ class SingleColorPalette extends Component {
             this.props.palette,
             this.props.colorId
         );
-        console.log(this._shades);
         this.state = { format: "hex" };
     }
 
